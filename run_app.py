@@ -4,7 +4,7 @@ import flask
 import os
 
 
-app = flask.Flask(__name__, static_folder='temp/images/')
+app = flask.Flask(__name__, static_url_path='/static')
 
 
 def init_model():
@@ -23,7 +23,7 @@ def init_model():
     return model_dict
 
 
-models = init_model()
+# models = init_model()
 
 
 @app.route("/")
@@ -99,7 +99,8 @@ def predict():
         else:
             return "file not uploaded"
 
-        return flask.render_template("result.html", data=result["data"])
+        return flask.render_template("result.html", data=result["data"], cm=result["confusion_matrix"],
+                                     cr=result["classification_report"])
         # return app.response_class(response=flask.json.dumps(result), mimetype='application/json')
         # return result["classification_report"]
     else:
