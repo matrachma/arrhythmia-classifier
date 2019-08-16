@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Arrhythmia Classifier</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>Beat ID</th>
+            <th>Image</th>
+            <th>Symbol</th>
+            <th>True Class</th>
+            <th>Predicted Class</th>
+        </tr>
+        {% for row in data %}
+        <tr>
+            <td>{{ row['id_beat'] }}</td>
+            <td>
+                <img src="{{ row['file_image'] }}">
+            </td>
+            <td>{{ row['beat_symbol'] }}</td>
+            <td>{{ row['true_class'] }}</td>
+            <td>{{ row['predicted_class'] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Arrhytmia Classifier</title>
+</head>
+<body>
+      <form action="http://localhost:5000/evaluate" method="POST" enctype= "multipart/form-data">
+          <input type="file" name="dat"/>
+          <input type="file" name="hea"/>
+          <input type="file" name="atr"/>
+          <select name="model_select">
+              <option value="sgd">SGD</option>
+              <option value="adam">Adam</option>
+              <option value="adagrad">Adagrad</option>
+              <option value="adabound">Adabound</option>
+              <option value="amsbound">Amsbound</option>
+              <option value="adadelta">Adadelta</option>
+          </select>
+          <input type="submit"/>
+      </form>
+</body>
+</html>
