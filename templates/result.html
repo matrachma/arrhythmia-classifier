@@ -199,32 +199,34 @@
                             <div class="main-card mb-3 card">
                                 <div class="card-body">
                                     <h5 class="card-title">Prediction Details</h5>
-                                    <div class="collapse table-responsive" id="collapseTable">
-                                        <table class="align-middle mb-0 table table-borderless table-striped table-hover display">
-                                            <thead>
-                                                <tr>
-                                                    <th class="text-center">Beat ID</th>
-                                                    <th>Image</th>
-                                                    <th class="text-center">Symbol</th>
-                                                    <th class="text-center">True Class</th>
-                                                    <th class="text-center">Predicted Class</th>
-                                                    <th class="text-center">Flag</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {% for row in data %}
-                                                <tr>
-                                                    <td class="text-center text-muted">{{ row['id_beat'] }}</td>
-                                                    <td>
-                                                        <img src="{{ row['file_image'] }}" alt="{{ row['file_image'] }}">
-                                                    </td><td class="text-center">{{ row['beat_symbol'] }}</td>
-                                                    <td class="text-center">{{ row['true_class'] }}</td>
-                                                    <td class="text-center">{{ row['predicted_class'] }}</td>
-                                                    <td class="text-center">{{ row['flag'] }}</td>
-                                                </tr>
-                                                {% endfor %}
-                                            </tbody>
-                                        </table>
+                                    <div class="collapse table-responsive scroll-area-lg" id="collapseTable">
+                                        <div class="scrollbar-container ps--active-y">
+                                            <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="text-center">Beat ID</th>
+                                                        <th>Image</th>
+                                                        <th class="text-center">Symbol</th>
+                                                        <th class="text-center">True Class</th>
+                                                        <th class="text-center">Predicted Class</th>
+                                                        <th class="text-center">Flag</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for row in data %}
+                                                    <tr>
+                                                        <td class="text-center text-muted">{{ row['id_beat'] }}</td>
+                                                        <td>
+                                                            <img src="{{ row['file_image'] }}" alt="{{ row['file_image'] }}">
+                                                        </td><td class="text-center">{{ row['beat_symbol'] }}</td>
+                                                        <td class="text-center">{{ row['true_class'] }}</td>
+                                                        <td class="text-center">{{ row['predicted_class'] }}</td>
+                                                        <td class="text-center">{{ row['flag'] }}</td>
+                                                    </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="card-footer">

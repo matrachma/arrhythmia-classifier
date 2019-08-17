@@ -11,6 +11,7 @@ import wfdb
 import os
 import biosppy
 import cv2
+import re
 import matplotlib.pyplot as plt
 
 model = None
@@ -249,8 +250,9 @@ def evaluate_model(model_dict, patient, model_selected):
 
         response = {
             "data": data,
-            "confusion_matrix": confusion_matrix(y_true, y_pred),
-            "classification_report": classification_report(y_true, y_pred, target_names=target_names),
+            "confusion_matrix": preprocess_report(confusion_matrix(y_true, y_pred)),
+            "classification_report": preprocess_report(
+                classification_report(y_true, y_pred, target_names=target_names)),
             "total_classified": str(len(data)),
             "miss_classified": str(miss_classified),
         }
@@ -258,5 +260,9 @@ def evaluate_model(model_dict, patient, model_selected):
     return response
 
 
-def hello():
-    print("hello world")
+def preprocess_report(report):
+    processed = re.sub(r" ", "&nbsp;", report)
+    processed = re.sub("\n\n", "\n", processed)
+    processed = re.sub("\n", "<br>", processed)
+
+    return processed

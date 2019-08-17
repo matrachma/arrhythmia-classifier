@@ -2,7 +2,6 @@ from utils import evaluate_model, load_saved_model
 from werkzeug.utils import secure_filename
 import flask
 import os
-import re
 
 
 app = flask.Flask(__name__, static_url_path='/static')
@@ -95,23 +94,12 @@ def predict():
         if file_is_ok and model_selected:
             patient = str(a_file_target.split("/")[-1])
             patient = patient.split(".")[0]
-            # uploaded_file = a_file_target.split(".")[0]
             result = evaluate_model(models, patient, model_select)
         else:
             return "file not uploaded"
 
-        cr = result["classification_report"]
-        cr = re.sub(r" ", "&nbsp;", cr)
-        cr = re.sub("\n\n", "\n", cr)
-        cr = re.sub("\n", "<br>", cr)
-
-        cm = result["confusion_matrix"]
-        cm = re.sub(r" ", "&nbsp;", str(cm))
-        cm = re.sub("\n\n", "\n", cm)
-        cm = re.sub("\n", "<br>", cm)
-
-        return flask.render_template("result.html", data=result["data"], cm=cm,
-                                     cr=cr, classified=result["total_classified"],
+        return flask.render_template("result.html", data=result["data"], cm=result["confusion_matrix"],
+                                     cr=result["classification_report"], classified=result["total_classified"],
                                      miss=result["miss_classified"], patient=patient)
     else:
         return flask.render_template("index.html")
