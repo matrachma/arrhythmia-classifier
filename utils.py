@@ -174,7 +174,9 @@ def load_data(patient_no):
     ts_beat_id = []
     ts_symbol = []
 
-    for f in os.listdir(image_dir):
+    list_file = os.listdir(image_dir)
+
+    for f in list_file:
         full_path_file = os.path.join(image_dir, f)
         filename_wo_extension = str(f.split(".")[0])
         split_filename = filename_wo_extension.split("-")
@@ -182,7 +184,7 @@ def load_data(patient_no):
         ts_label.append(label_map[beat_class])
         ts_data.append(np.asarray(Image.open(full_path_file)))
         ts_file_path.append(full_path_file)
-        ts_beat_id.append(beat_id)
+        ts_beat_id.append(int(beat_id))
         ts_symbol.append(beat_symbol)
 
     return np.asarray(ts_data), np.asarray(ts_label), ts_file_path, ts_beat_id, ts_symbol
@@ -218,26 +220,39 @@ def evaluate_model(model_dict, patient, model_selected):
         y_pred = y_pred.argmax(axis=1)
         y_true = test_labels_cat.argmax(axis=1)
 
-        all_class_true_this_task = list(set(y_true))
-        all_class_true_this_task = [class_map[i] for i in all_class_true_this_task]
-        all_class_pred_this_task = list(set(y_pred))
-        all_class_pred_this_task = [class_map[i] for i in all_class_pred_this_task]
+        all_class_true_this_task = sorted(list(set(y_true)))
+        all_class_pred_this_task = sorted(list(set(y_pred)))
+        target_names = sorted(list(set(all_class_pred_this_task + all_class_true_this_task)))
+        target_names = [class_map[i] for i in target_names]
 
-        target_names = list(set(all_class_pred_this_task + all_class_true_this_task))
+        miss_classified = 0
 
         for i, true_label in enumerate(y_true):
+            flag = "Correct"
+            predicted_class = class_map[y_pred[i]]
+            true_class = class_map[true_label]
+
+            if predicted_class != true_class:
+                miss_classified += 1
+                flag = "Wrong"
+
             data.append({
                 "id_beat": beat_ids[i],
                 "beat_symbol": beat_symbols[i],
                 "file_image": file_paths[i],
-                "predicted_class": class_map[y_pred[i]],
-                "true_class": class_map[true_label]
+                "predicted_class": predicted_class,
+                "true_class": true_class,
+                "flag": flag
             })
+
+        data = sorted(data, key=lambda i: i["id_beat"])
 
         response = {
             "data": data,
             "confusion_matrix": confusion_matrix(y_true, y_pred),
-            "classification_report": classification_report(y_true, y_pred, target_names=target_names)
+            "classification_report": classification_report(y_true, y_pred, target_names=target_names),
+            "total_classified": str(len(data)),
+            "miss_classified": str(miss_classified),
         }
 
     return response
