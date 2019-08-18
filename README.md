@@ -18,7 +18,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 >>>
 ```
 
-Move and rename your saved model to saved_models dir, so must be like:
+Move and rename your saved model (*.h5 file) to saved_models dir, so must be like:
 
 ```
 arrhythmia-classifier
@@ -50,3 +50,12 @@ python -m run_app.py
 ```
 
 Open http://127.0.0.1:5000/ 
+
+![form-0](https://user-images.githubusercontent.com/8687198/63220163-33da7000-c1ac-11e9-87ee-0a8c6d1eba9b.png)
+
+![form-1](https://user-images.githubusercontent.com/8687198/63220164-34730680-c1ac-11e9-82b7-40d8a626a824.png)
+
+
+![result-0](https://user-images.githubusercontent.com/8687198/63220165-34730680-c1ac-11e9-923d-b4b11a4a2b72.png)
+
+![result-1](https://user-images.githubusercontent.com/8687198/63220166-34730680-c1ac-11e9-8ac2-5170af7e4e53.png)

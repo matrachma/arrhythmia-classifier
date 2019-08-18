@@ -261,6 +261,9 @@ def evaluate_model(model_dict, patient, model_selected):
 
 
 def preprocess_report(report):
+    if type(report) != str:
+        report = str(report)
+
     processed = re.sub(r" ", "&nbsp;", report)
     processed = re.sub("\n\n", "\n", processed)
     processed = re.sub("\n", "<br>", processed)
