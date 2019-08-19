@@ -81,9 +81,10 @@ def load_saved_model(optm='', path=''):
 
     if os.path.isfile(path):
         the_model.load_weights(path)
-        the_model._make_predict_function()
     else:
-        warnings.warn("Warning: File {} is not exist, you will use model with random weights".format(path))
+        warnings.warn("Warning: File {} is not exist, you will use a model with random weights".format(path))
+
+    the_model._make_predict_function()
 
     return the_model
 
