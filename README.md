@@ -53,11 +53,22 @@ Open http://localhost:5000
 
 ## Docker Installation
 
-### Build and run an image for the app 
+### Build and run an image for the app
+First time
 ```shell
-$ cd arrhythmia-classifier
-$ docker build -t arrhythmia-image .
-$ docker run --name arrhythmia-app -d -p 5000:5000 arrhythmia-image 
+cd arrhythmia-classifier
+docker build -t arrhythmia-image .
+docker run --name arrhythmia-app -d -p 5000:5000 arrhythmia-image 
+```
+
+to stop exec this
+```shell
+docker stop aritmia-app
+```
+
+to run again just exec this
+```shell
+docker start aritmia-app
 ```
 
 ### Pull an built-image from Docker hub
