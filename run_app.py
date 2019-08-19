@@ -4,18 +4,19 @@ import flask
 import os
 
 
+ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 app = flask.Flask(__name__, static_url_path='/static')
 
 
 def init_model():
 
     model_dict = {
-        "sgd": load_saved_model("sgd", "saved_models/sgd.h5"),
-        "adam": load_saved_model("adam", "saved_models/adam.h5"),
-        "adagrad": load_saved_model("adagrad", "saved_models/adagrad.h5"),
-        "adabound": load_saved_model("adabound", "saved_models/adabound.h5"),
-        "amsbound": load_saved_model("amsbound", "saved_models/amsbound.h5"),
-        "adadelta": load_saved_model("adadelta", "saved_models/adadelta.h5")
+        "sgd": load_saved_model("sgd", os.path.join(ROOT_DIR, "saved_models/sgd.h5")),
+        "adam": load_saved_model("adam", os.path.join(ROOT_DIR, "saved_models/adam.h5")),
+        "adagrad": load_saved_model("adagrad", os.path.join(ROOT_DIR, "saved_models/adagrad.h5")),
+        "adabound": load_saved_model("adabound", os.path.join(ROOT_DIR, "saved_models/adabound.h5")),
+        "amsbound": load_saved_model("amsbound", os.path.join(ROOT_DIR, "saved_models/amsbound.h5")),
+        "adadelta": load_saved_model("adadelta", os.path.join(ROOT_DIR, "saved_models/adadelta.h5"))
     }
 
     print("Model loaded")
