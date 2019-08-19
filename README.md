@@ -49,7 +49,22 @@ pip install -r requirements.txt
 python -m run_app.py
 ```
 
-Open http://127.0.0.1:5000/ 
+Open http://localhost:5000 
+
+## Docker Installation
+
+### Build and run an image for the app 
+```shell
+$ cd arrhythmia-classifier
+$ docker build -t arrhythmia-image .
+$ docker run --name arrhythmia-app -d -p 5000:5000 arrhythmia-image 
+```
+
+### Pull an built-image from Docker hub
+Will be available soo.
+
+### Running
+Open http://localhost:5000 after waiting for a while to install in the container.
 
 ![form-0](https://user-images.githubusercontent.com/8687198/63220163-33da7000-c1ac-11e9-87ee-0a8c6d1eba9b.png)
 
