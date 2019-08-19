@@ -13,23 +13,14 @@ import biosppy
 import cv2
 import re
 import matplotlib.pyplot as plt
+import warnings
 
-model = None
-MODEL_DICT = {
-    "sgd": "saved_models/sgd.h5",
-    "adam": "saved_models/adam.h5",
-    "adagrad": "saved_models/adagrad.h5",
-    "adabound": "saved_models/adabound.h5",
-    "amsbound": "saved_models/amsbound.h5",
-    "adadelta": "saved_models/adadelta.h5"
-}
 class_image = ["F", "N", "Q", "SVEB", "VEB"]
 label_map = {class_image[i]: i for i in range(len(class_image))}
 class_map = {i: class_image[i] for i in range(len(class_image))}
 
 
 def load_saved_model(optm='', path=''):
-    # global model
     image_height = 128
     image_width = 128
     num_channels = 1
@@ -88,8 +79,12 @@ def load_saved_model(optm='', path=''):
                           optimizer=opt.Adadelta(lr=1.0, rho=0.95, epsilon=None, decay=0.0),
                           metrics=['accuracy'])
 
-    the_model.load_weights(path)
-    the_model._make_predict_function()
+    if os.path.isfile(path):
+        the_model.load_weights(path)
+        the_model._make_predict_function()
+    else:
+        warnings.warn("Warning: File {} is not exist, you will use model with random weights".format(path))
+
     return the_model
 
 
