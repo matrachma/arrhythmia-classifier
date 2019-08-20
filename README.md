@@ -1,6 +1,6 @@
-# Arryhthmia Classifier
+# Arrhythmia Classifier
 
-Simple UI for Arryhthmia Classifier
+Simple UI for Arrhythmia Classifier
 
 ## Getting Started
 
@@ -10,7 +10,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 Use python 3.7.4
 
-```
+```shell
 $ python
 Python 3.7.4 (default, Aug 11 2019, 21:48:06) 
 [Clang 10.0.1 (clang-1001.0.46.4)] on darwin
@@ -18,7 +18,14 @@ Type "help", "copyright", "credits" or "license" for more information.
 >>>
 ```
 
-Move and rename your saved model (*.h5 file) to saved_models dir, so must be like:
+Clone this repo
+
+```shell
+$ git clone https://github.com/matrachma/arrhythmia-classifier.git
+$ cd arrhythmia-classifier
+```
+
+If using local installation, move and rename your saved model (*.h5 file) to saved_models dir, and must be like:
 
 ```
 arrhythmia-classifier
@@ -35,31 +42,51 @@ arrhythmia-classifier
     |-.....
 ```
 
-## Installing
+## Local Installation
+
+### Install requirements
 
 Create python virtual environment or just simply install required package.
 
-```
-pip install -r requirements.txt
-```
-
-## Running
-
-```
-python -m run_app.py
+```shell
+$ pip install -r requirements.txt
 ```
 
-Open http://localhost:5000 
+### Running
+
+```shell
+$ python -m run_app.py
+```
+Open http://localhost:5000
+
 
 ## Docker Installation
 
-### Build and run an image for the app
-First time
+### Build an image for the app locally
+
+First time, build an image locally
 ```shell
-cd arrhythmia-classifier
-docker build -t arrhythmia-image .
-docker run --name arrhythmia-app -d -p 5000:5000 arrhythmia-image 
+$ cd arrhythmia-classifier
+$ docker build -t arrhythmia-image .
 ```
+
+### Pull an built-image from Docker hub
+For your convenience, just pull the image instead of building it.
+```shell
+$ docker pull matrachma/arrhythmia-image:latest
+$ docker tag matrachma/arrhythmia-image arrhythmia-image:latest
+```
+
+### Running
+Run the image
+```shell
+$ docker run --name aritmia-app -d -p 5000:5000 -v <full/path/of/your/models/directory/>:/usr/src/app/saved_models/ arrhythmia-image 
+```
+
+'<full/path/of/your/models/directory/>' is the full path where your model .h5 files are stored.
+Make sure all model's file names are suit with Prerequisites section.
+
+Open http://localhost:5000 after waiting for a while to install in the container.
 
 to stop exec this
 ```shell
@@ -71,11 +98,6 @@ to run again just exec this
 docker start aritmia-app
 ```
 
-### Pull an built-image from Docker hub
-Will be available soo.
-
-### Running
-Open http://localhost:5000 after waiting for a while to install in the container.
 
 ![form-0](https://user-images.githubusercontent.com/8687198/63220163-33da7000-c1ac-11e9-87ee-0a8c6d1eba9b.png)
 
