@@ -70,7 +70,7 @@ $ cd arrhythmia-classifier
 $ docker build -t arrhythmia-image .
 ```
 
-### Pull an built-image from Docker hub
+### OR Pull an built-image from Docker hub [RECOMMENDED]
 For your convenience, just pull the image instead of building it.
 ```shell
 $ docker pull matrachma/arrhythmia-image:latest
@@ -83,7 +83,7 @@ Run the image
 $ docker run --name aritmia-app -d -p 5000:5000 -v <full/path/of/your/models/directory/>:/usr/src/app/saved_models/ arrhythmia-image 
 ```
 
-'<full/path/of/your/models/directory/>' is the full path where your model .h5 files are stored.
+The `<full/path/of/your/models/directory/>` is the full path where your model .h5 files are stored.
 Make sure all model's file names are suit with Prerequisites section.
 
 Open http://localhost:5000 after waiting for a while to install in the container.
