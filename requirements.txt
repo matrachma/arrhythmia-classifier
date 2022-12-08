@@ -7,7 +7,7 @@ bidict==0.17.5
 bioread==1.0.4
 biosppy==0.6.1
 bleach==3.1.0
-certifi==2018.11.29
+certifi==2022.12.7
 chardet==3.0.4
 Click==7.0
 cvxopt==1.2.3
